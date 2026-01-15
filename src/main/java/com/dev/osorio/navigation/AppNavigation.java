@@ -11,10 +11,10 @@ import java.util.Map;
 
 public class AppNavigation {
 
-    private BorderPane root;
-    private final Map<String, Parent> views =  new HashMap<>();
+    private static BorderPane root;
+    private static final Map<String, Parent> views =  new HashMap<>();
 
-    public Parent initialize(String fxmlPath) {
+    public static Parent initialize(String fxmlPath) {
 
         try {
 
@@ -28,7 +28,7 @@ public class AppNavigation {
         }
     }
 
-    public void loadView(String fxmlName, String fxmlPath) {
+    public static void loadView(String fxmlName, String fxmlPath) {
 
         try {
 
@@ -40,5 +40,9 @@ public class AppNavigation {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static void navigateTo(String fxmlName) {
+        root.setCenter(views.get(fxmlName));
     }
 }
