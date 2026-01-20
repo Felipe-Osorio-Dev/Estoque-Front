@@ -6,12 +6,13 @@ module com.dev.osorio {
     requires com.fasterxml.jackson.core;
     requires java.net.http;
     requires org.mapstruct;
+    requires com.fasterxml.jackson.datatype.jsr310;
 
     opens com.dev.osorio to javafx.fxml;
     opens com.dev.osorio.controller.main to javafx.fxml;
     opens com.dev.osorio.controller.product to javafx.fxml;
     exports com.dev.osorio;
-    exports  com.dev.osorio.dto;
     exports  com.dev.osorio.model;
     exports com.dev.osorio.mapper;
+    exports com.dev.osorio.dto.response;
 }
