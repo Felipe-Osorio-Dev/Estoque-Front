@@ -1,12 +1,17 @@
 package com.dev.osorio.controller.product;
 
+import com.dev.osorio.config.HttpConfig;
+import com.dev.osorio.mapper.ProductMapper;
 import com.dev.osorio.model.ProductModel;
+import com.dev.osorio.presenter.ProductPresenter;
+import com.dev.osorio.service.ProductService;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -14,16 +19,67 @@ import java.time.format.DateTimeFormatter;
 public class ProductController {
 
     @FXML
+    private Button btnSearch;
+
+    @FXML
+    private TextField txtFieldSearch;
+
+    @FXML
     private TableView<ProductModel> productTableView;
+    @FXML
+    private TableColumn<ProductModel, String> nameColumn;
+    @FXML
+    private TableColumn<ProductModel, String> codProductColumn;
+    @FXML
+    private TableColumn<ProductModel, Integer> unitColumn;
+    @FXML
+    private TableColumn<ProductModel, LocalDate> validateColumn;
+
+    private ProductMapper productMapper;
+    private ProductPresenter  productPresenter;
 
     @FXML
     public void initialize() {
-        //Criar as Colunas da Tabela
-        TableColumn<ProductModel, String> nameColumn = new TableColumn<>("Nome");
-        TableColumn<ProductModel, Long> codProductColumn = new TableColumn<>("Cod Produto");
-        TableColumn<ProductModel, Long> amountColumn = new TableColumn<>("Unidades");
-        TableColumn<ProductModel, LocalDate> validateColumn = new TableColumn<>("Validade");
 
+        productMapper = ProductMapper.INSTANCE;
+        productPresenter = new ProductPresenter(new ProductService(new HttpConfig(), new ObjectMapper()));
+
+        tableConfig();
+        productTableView.setVisible(false);
+
+    }
+
+    @FXML
+    public void getProductByData() {
+        productPresenter.getProductByData(
+                txtFieldSearch.getText(),
+                response -> {
+                    ProductModel model = productMapper.toModel(response);
+                    productTableView.setItems(FXCollections.observableArrayList(model));
+                    productTableView.setVisible(true);
+                },
+                error -> {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Erro");
+                    alert.setHeaderText("Produto não encontrado");
+                    alert.setContentText(error.getMessage());
+                    alert.showAndWait();
+                }
+        );
+    }
+
+    private void tableConfig() {
+        //Vincular as colunas as propriedades da classe modelo
+        nameColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().name()));
+        codProductColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().codProduct()));
+        unitColumn.setCellValueFactory(data -> new SimpleIntegerProperty(data.getValue().unit()).asObject());
+        validateColumn.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().validate()));
+
+        //Formatar a data da coluna validateColumn para o padrao Brasileiro
+        dateFormatter();
+    }
+
+    private void dateFormatter() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         validateColumn.setCellFactory(column -> {
@@ -39,26 +95,6 @@ public class ProductController {
                 }
             };
         });
-
-        //Vincular as colunas as propriedades da classe modelo
-        nameColumn.setCellValueFactory(data -> data.getValue().getNameProperty());
-        codProductColumn.setCellValueFactory(data -> data.getValue().getCodProductProperty().asObject());
-        amountColumn.setCellValueFactory(data -> data.getValue().getAmountProperty().asObject());
-        validateColumn.setCellValueFactory(data -> data.getValue().getValidateProperty());
-
-        //Adicionar as colunas a tabela
-        productTableView.getColumns().addAll(nameColumn, codProductColumn, amountColumn, validateColumn);
-
-        //Criar uma Lista Observavel
-        ObservableList<ProductModel> productObservableList = FXCollections.observableArrayList(
-                new ProductModel("Chocolate", 128743L, 1850L, LocalDate.of(2027, 10, 15)),
-                new ProductModel("Bolacha", 367498L, 560L, LocalDate.of(2026, 12, 5)),
-                new ProductModel("Salgadinho", 761250L, 4872L, LocalDate.of(2026, 4, 18)),
-                new ProductModel("Refrigerante", 490061L, 2566L, LocalDate.of(2026, 7, 20))
-        );
-
-        productTableView.setItems(productObservableList);
-
     }
 
 
