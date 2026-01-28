@@ -11,7 +11,7 @@
         <menus>
           <Menu mnemonicParsing="false" text="Cadastrar">
             <items>
-              <MenuItem mnemonicParsing="false" text="produto" />
+              <MenuItem mnemonicParsing="false" text="Produto" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Gerenciar">
