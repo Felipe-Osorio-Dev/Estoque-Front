@@ -1,15 +1,9 @@
 package com.dev.osorio.controller.product;
 
-import com.dev.osorio.config.HttpConfig;
-import com.dev.osorio.mapper.ProductMapper;
 import com.dev.osorio.model.ProductModel;
 import com.dev.osorio.presenter.ProductPresenter;
-import com.dev.osorio.service.ProductService;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -20,10 +14,8 @@ public class ProductController {
 
     @FXML
     private Button btnSearch;
-
     @FXML
     private TextField txtFieldSearch;
-
     @FXML
     private TableView<ProductModel> productTableView;
     @FXML
@@ -34,46 +26,49 @@ public class ProductController {
     private TableColumn<ProductModel, Integer> unitColumn;
     @FXML
     private TableColumn<ProductModel, LocalDate> validateColumn;
-
-    private ProductMapper productMapper;
     private ProductPresenter  productPresenter;
+    private ObservableList<ProductModel> tableListItem;
+
+    public void setPresenter(ProductPresenter productPresenter) {
+        this.productPresenter = productPresenter;
+    }
 
     @FXML
     public void initialize() {
-
-        productMapper = ProductMapper.INSTANCE;
-        productPresenter = new ProductPresenter(new ProductService(new HttpConfig(), new ObjectMapper()));
-
         tableConfig();
         productTableView.setVisible(false);
-
     }
 
     @FXML
     public void getProductByData() {
-        productPresenter.getProductByData(
-                txtFieldSearch.getText(),
-                response -> {
-                    ProductModel model = productMapper.toModel(response);
-                    productTableView.setItems(FXCollections.observableArrayList(model));
-                    productTableView.setVisible(true);
-                },
-                error -> {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Erro");
-                    alert.setHeaderText("Produto não encontrado");
-                    alert.setContentText(error.getMessage());
-                    alert.showAndWait();
-                }
-        );
+        String text = txtFieldSearch.getText();
+
+        if (isValid(text)) {
+            productPresenter.getProductByData(
+                    text,
+                    model -> {
+                        tableListItem = FXCollections.observableArrayList(model);
+                        productTableView.setItems(tableListItem);
+                        productTableView.setVisible(true);
+                    },
+                    error -> {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Erro");
+                        alert.setHeaderText("Produto não encontrado");
+                        alert.setContentText(error.getMessage());
+                        alert.showAndWait();
+                    }
+            );
+        }
+
     }
 
     private void tableConfig() {
         //Vincular as colunas as propriedades da classe modelo
-        nameColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().name()));
-        codProductColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().codProduct()));
-        unitColumn.setCellValueFactory(data -> new SimpleIntegerProperty(data.getValue().unit()).asObject());
-        validateColumn.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().validate()));
+        nameColumn.setCellValueFactory(data -> data.getValue().getNameProperty());
+        codProductColumn.setCellValueFactory(data -> data.getValue().getCodProductProperty());
+        unitColumn.setCellValueFactory(data -> data.getValue().getUnitProperty().asObject());
+        validateColumn.setCellValueFactory(data -> data.getValue().getValidateProperty());
 
         //Formatar a data da coluna validateColumn para o padrao Brasileiro
         dateFormatter();
@@ -97,5 +92,17 @@ public class ProductController {
         });
     }
 
+    private Boolean isValid(String text) {
+        if (text == null || text.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Campo de Texto vazio");
+            alert.setContentText("O campo de texto deve ser preenchido");
+            alert.showAndWait();
 
+            return false;
+        }
+
+        return true;
+    }
 }
