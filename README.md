@@ -1,0 +1,92 @@
+# 📦 Estoque-Front
+
+## 📌 Descrição
+Estoque-Front é uma aplicação desktop front-end desenvolvida em **Java** com **JavaFX**, utilizando **FXML** e **SceneBuilder** para a construção das interfaces.
+
+O projeto tem como foco inicial permitir a busca de produtos através de uma **API backend**, possibilitando localizar um produto por **ID, nome ou código**.  
+Esta é a primeira etapa do sistema de gestão de estoque, projetada para evoluir com novas funcionalidades.
+
+---
+
+## 🎯 Funcionalidade Atual
+- ✔️ Buscar produto por **ID**  
+- ✔️ Buscar produto por **nome**  
+- ✔️ Buscar produto por **código do produto**  
+- ✔️ Consumo de **API REST** para obtenção dos dados  
+- ✔️ Exibição dos dados do produto na interface **JavaFX**
+
+---
+
+## 🔗 Dependência do Backend
+⚠️ A aplicação front-end depende de um **backend em execução** para funcionar corretamente.
+
+O backend é responsável por:
+- Disponibilizar a **API REST**  
+- Processar as requisições de busca  
+- Retornar os dados dos produtos  
+
+➡️ Sem o backend ativo, a funcionalidade de busca não retornará resultados.  
+
+**Importante:** Certifique-se de que o backend esteja rodando antes de iniciar o front-end.  
+*(Se quiser, depois podemos linkar diretamente o repositório do backend aqui.)*
+
+---
+
+## 🚀 Funcionalidades Planejadas
+- 🔜 Listagem de produtos  
+- 🔜 Cadastro de produtos  
+- 🔜 Edição de produtos  
+- 🔜 Exclusão de produtos  
+- 🔜 Integração completa front + backend  
+- 🔜 Persistência em banco de dados  
+
+---
+
+## 🛠️ Tecnologias Utilizadas
+- Java 11+  
+- JavaFX  
+- FXML + SceneBuilder  
+- Maven  
+- Consumo de API REST (**HTTP Client**)  
+
+---
+
+
+---
+
+## ▶️ Como Executar o Projeto
+
+### 🧾 Pré-requisitos
+- JDK 11+  
+- Maven  
+- Backend da aplicação em execução  
+
+### 🏃‍♂️ Passos para execução
+```bash
+# Clone o repositório do front-end
+git clone https://github.com/Felipe-Osorio-Dev/Estoque-Front.git
+cd Estoque-Front
+
+# Inicie o backend da aplicação (API REST)
+
+# Execute o front-end
+mvn clean javafx:run
+```
+
+## 🧠 Conceitos e Boas Práticas
+- Separação de responsabilidades (UI ↔ Controller ↔ Model)
+
+- Consumo de API REST
+
+- Código preparado para expansão
+
+- Uso de FXML para desacoplamento da interface
+
+## 📈 Status do Projeto
+🚧 Em desenvolvimento
+
+✔️ Funcionalidade implementada: Busca de produto via API
+
+## 👤 Autor
+- Felipe Osório  
+- GitHub: Felipe-Osorio-Dev
