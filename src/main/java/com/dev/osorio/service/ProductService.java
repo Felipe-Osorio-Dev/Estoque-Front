@@ -1,13 +1,12 @@
 package com.dev.osorio.service;
 
 import com.dev.osorio.config.HttpConfig;
+import com.dev.osorio.config.JsonObjectConfig;
 import com.dev.osorio.dto.error.ErrorResponse;
 import com.dev.osorio.dto.response.ProductResponse;
 import com.dev.osorio.exception.ProductNotFoundException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -18,19 +17,17 @@ import java.util.concurrent.CompletableFuture;
 public class ProductService {
 
     private final HttpConfig httpConfig;
-    private final ObjectMapper objectMapper;
+    private final JsonObjectConfig jsonObjectConfig;
 
-    public ProductService(HttpConfig httpConfig, ObjectMapper objectMapper) {
+    public ProductService(HttpConfig httpConfig, JsonObjectConfig jsonObjectConfig) {
         this.httpConfig = httpConfig;
-        this.objectMapper = objectMapper;
+        this.jsonObjectConfig = jsonObjectConfig;
     }
 
     public CompletableFuture<ProductResponse> getProductByData(String data) {
 
-        objectMapper.registerModule(new JavaTimeModule());
-        objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-
         HttpClient httpClient = httpConfig.getHttpClient();
+        ObjectMapper objectMapper = jsonObjectConfig.getObjectMapper();
 
         HttpRequest request = HttpRequest.newBuilder().uri(URI.create("http://localhost:8080/products/" + data)).GET().build();
 
