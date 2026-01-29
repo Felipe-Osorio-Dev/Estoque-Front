@@ -25,7 +25,10 @@ O backend é responsável por:
 - Processar as requisições de busca  
 - Retornar os dados dos produtos  
 
-➡️ Sem o backend ativo, a funcionalidade de busca não retornará resultados.  
+➡️ Sem o backend ativo, a funcionalidade de busca não retornará resultados.
+
+# Link do Backend
+https://github.com/Felipe-Osorio-Dev/Estoque-BackEnd
 
 **Importante:** Certifique-se de que o backend esteja rodando antes de iniciar o front-end.  
 *(Se quiser, depois podemos linkar diretamente o repositório do backend aqui.)*
