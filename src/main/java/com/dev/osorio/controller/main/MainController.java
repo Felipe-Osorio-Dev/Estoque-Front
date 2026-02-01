@@ -15,4 +15,7 @@ public class MainController {
     public void navigateToProduct() {
         mainPresenter.navigateTo("productView");
     }
+
+    @FXML
+    public void navigateToRegister() {mainPresenter.navigateTo("registerView");}
 }
