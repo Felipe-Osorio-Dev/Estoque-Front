@@ -29,7 +29,10 @@ public class ProductService {
         HttpClient httpClient = httpConfig.getHttpClient();
         ObjectMapper objectMapper = jsonObjectConfig.getObjectMapper();
 
-        HttpRequest request = HttpRequest.newBuilder().uri(URI.create("http://localhost:8080/products/" + data)).GET().build();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:8080/products/" + data))
+                .GET()
+                .build();
 
         return httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenApply(response -> {
