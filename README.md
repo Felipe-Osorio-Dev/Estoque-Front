@@ -54,6 +54,11 @@ https://github.com/Felipe-Osorio-Dev/Estoque-BackEnd
 
 ---
 
+## 🖼️ Imagens do Sistema
+
+<img width="300" height="280" alt="homeScreen" src="https://github.com/user-attachments/assets/2272a557-dfbe-432c-87ff-244e4efcc477" />
+<img width="300" height="280" alt="registerScreen" src="https://github.com/user-attachments/assets/04dae461-f88e-4acd-8008-7e1c1dec3855" />
+<img width="300" height="280" alt="productScreen" src="https://github.com/user-attachments/assets/6d4ad49a-394a-447b-a518-22a01e63ad3d" />
 
 ---
 
@@ -76,6 +81,8 @@ cd Estoque-Front
 mvn clean javafx:run
 ```
 
+---
+
 ## 🧠 Conceitos e Boas Práticas
 - Separação de responsabilidades (UI ↔ Controller ↔ Model)
 
@@ -85,6 +92,8 @@ mvn clean javafx:run
 
 - Uso de FXML para desacoplamento da interface
 
+---
+
 ## 📈 Status do Projeto
 🚧 Em desenvolvimento
 
@@ -92,4 +101,4 @@ mvn clean javafx:run
 
 ## 👤 Autor
 - Felipe Osório  
-- GitHub: Felipe-Osorio-Dev
+- GitHub: [Felipe-Osorio-Dev](https://github.com/Felipe-Osorio-Dev)
