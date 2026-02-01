@@ -12,6 +12,7 @@ module com.dev.osorio {
     opens com.dev.osorio to javafx.fxml;
     opens com.dev.osorio.controller.main to javafx.fxml;
     opens com.dev.osorio.controller.product to javafx.fxml;
+    opens com.dev.osorio.controller.register to javafx.fxml;
     exports com.dev.osorio;
     exports  com.dev.osorio.model;
     exports com.dev.osorio.mapper;
