@@ -35,6 +35,7 @@ public class App extends Application {
                     new ProductService(httpConfig, jsonObjectConfig), appNavigation)
             );
         });
+        appNavigation.loadView("registerView", "register/RegisterView.fxml", null);
 
         //Inicializar a Janela Principal do App
         Parent root = appNavigation.getView("mainView");
