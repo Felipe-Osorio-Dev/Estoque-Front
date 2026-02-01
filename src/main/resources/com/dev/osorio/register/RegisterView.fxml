@@ -8,23 +8,18 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
-      prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.dev.osorio.controller.register.RegisterController"
->
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dev.osorio.controller.register.RegisterController">
    <children>
       <Label layoutX="149.0" layoutY="14.0" text="Registrar Produto">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <TextField focusTraversable="false" layoutX="251.0" layoutY="108.0" />
-      <TextField focusTraversable="false" layoutX="251.0" layoutY="163.0" />
-      <TextField focusTraversable="false" layoutX="251.0" layoutY="218.0" />
-      <DatePicker focusTraversable="false" layoutX="241.0" layoutY="269.0" />
-      <Button layoutX="215.0" layoutY="332.0" mnemonicParsing="false" text="Cancelar" />
-      <Button layoutX="368.0" layoutY="332.0" mnemonicParsing="false" text="Registrar" />
+      <TextField fx:id="nameTextField" focusTraversable="false" layoutX="251.0" layoutY="108.0" />
+      <TextField fx:id="codProductTextField" focusTraversable="false" layoutX="251.0" layoutY="163.0" />
+      <TextField fx:id="unitTextField" focusTraversable="false" layoutX="251.0" layoutY="218.0" />
+      <DatePicker fx:id="dateTextField" focusTraversable="false" layoutX="241.0" layoutY="269.0" />
+      <Button fx:id="registerBtn" layoutX="268.0" layoutY="329.0" mnemonicParsing="false" text="Registrar" />
       <Label layoutX="151.0" layoutY="166.0" text="Cod-Produto:">
          <font>
             <Font name="System Bold Italic" size="14.0" />
