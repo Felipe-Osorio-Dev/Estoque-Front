@@ -3,23 +3,32 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dev.osorio.controller.main.MainController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dev.osorio.controller.main.MainController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
           <Menu mnemonicParsing="false" text="Cadastrar">
             <items>
-              <MenuItem mnemonicParsing="false" text="Produto" />
+              <MenuItem mnemonicParsing="false" onAction="#navigateToRegister" text="Produto" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Gerenciar">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#navigateToProduct" text="produto" />
+              <MenuItem mnemonicParsing="false" onAction="#navigateToProduct" text="Produto" />
             </items>
           </Menu>
         </menus>
       </MenuBar>
    </top>
+   <center>
+      <ImageView fitHeight="350.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+         <image>
+            <Image url="@../imagens/estoque.png" />
+         </image>
+      </ImageView>
+   </center>
 </BorderPane>
